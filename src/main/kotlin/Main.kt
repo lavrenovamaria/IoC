@@ -10,8 +10,7 @@ object TestSpring {
         val context = ClassPathXmlApplicationContext(
             "applicationContext.xml"
         )
-        val music: Music = context.getBean("musicBean", Music::class.java)
-        val musicPlayer = MusicPlayer(music)
+        val musicPlayer: MusicPlayer = context.getBean("musicPlayer", MusicPlayer::class.java)
         musicPlayer.playMusic()
         context.close()
     }

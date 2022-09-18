@@ -7,4 +7,9 @@
     <bean id="musicBean"
           class="edu.school21.ioc.music.ClassicalMusic">
     </bean>
+
+    <bean id="musicPlayer"
+          class="edu.school21.ioc.music.MusicPlayer">
+        <constructor-arg name="music" ref="musicBean"/>
+    </bean>
 </beans>
