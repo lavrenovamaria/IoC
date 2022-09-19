@@ -41,6 +41,6 @@
  </beans>
  ```
  
- [Лекция](https://www.youtube.com/watch?v=Ns0IxBXDbWw)
+ [Spring Framework. Урок 4: Инверсия управления. Inversion of Control (IoC).](https://www.youtube.com/watch?v=Ns0IxBXDbWw)
  
  [Inversion of Control Containers and the Dependency Injection pattern by Martin Fowler](https://www.martinfowler.com/articles/injection.html)
