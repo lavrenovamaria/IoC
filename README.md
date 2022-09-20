@@ -1,7 +1,4 @@
 # IoC
 Инверсия контейнеров управления и шаблон внедрения зависимостей
 
- 
-![](../Screen Shot 2022-09-20 at 6.24.31 PM.png)
-
-![](../Screen Shot 2022-09-20 at 6.25.06 PM.png)
+[Spring Framework. Урок 6: Внедрение зависимостей. Dependency Injection (DI). Часть 2.](https://www.youtube.com/watch?v=dBxRmUH3Af8)
