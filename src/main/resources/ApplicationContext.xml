@@ -10,6 +10,6 @@
 
     <bean id="musicPlayer"
           class="edu.school21.ioc.music.MusicPlayer">
-        <constructor-arg name="music" ref="musicBean"/>
+        <property name="music" ref="musicBean"/>
     </bean>
 </beans>
