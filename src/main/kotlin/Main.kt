@@ -12,6 +12,8 @@ object TestSpring {
         )
         val musicPlayer: MusicPlayer = context.getBean("musicPlayer", MusicPlayer::class.java)
         musicPlayer.playMusic()
+        println(musicPlayer.getName())
+        println(musicPlayer.getVolume())
         context.close()
     }
 }

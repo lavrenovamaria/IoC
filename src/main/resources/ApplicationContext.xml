@@ -11,5 +11,8 @@
     <bean id="musicPlayer"
           class="edu.school21.ioc.music.MusicPlayer">
         <property name="music" ref="musicBean"/>
+
+        <property name="name" value="Some name"/>
+        <property name="volume" value="10"/>
     </bean>
 </beans>
