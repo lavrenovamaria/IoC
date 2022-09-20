@@ -108,3 +108,33 @@ fun getName(): String? {
 ```
 
 <img width="515" alt="Screen Shot 2022-09-20 at 7 15 07 PM" src="https://user-images.githubusercontent.com/84707645/191310715-dc1f3a0d-3c76-4760-8e2a-e172e83ef592.png">
+
+
+## Добавление файла musicPlayer.properties
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="classpath:musicPlayer.properties"/>
+
+    <bean id="musicBean"
+          class="edu.school21.ioc.music.ClassicalMusic">
+    </bean>
+
+    <bean id="musicPlayer"
+          class="edu.school21.ioc.music.MusicPlayer">
+        <property name="music" ref="musicBean"/>
+
+        <property name="name" value="${musicPlayer.name}"/>
+        <property name="volume" value="${musicPlayer.volume}"/>
+    </bean>
+</beans>
+```
+
+<img width="715" alt="Screen Shot 2022-09-20 at 7 57 13 PM" src="https://user-images.githubusercontent.com/84707645/191319127-ed756664-8693-4a3d-a7a6-f3ab0f8eccbe.png">
+
