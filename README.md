@@ -138,3 +138,19 @@ fun getName(): String? {
 
 <img width="715" alt="Screen Shot 2022-09-20 at 7 57 13 PM" src="https://user-images.githubusercontent.com/84707645/191319127-ed756664-8693-4a3d-a7a6-f3ab0f8eccbe.png">
 
+
+```
+<context:property-placeholder location="classpath:musicPlayer.properties"/>
+```
+отвечает за путь к файлу
+
+```
+        <property name="name" value="${musicPlayer.name}"/>
+        <property name="volume" value="${musicPlayer.volume}"/>
+```
+обращается к значениям в файле
+
+```
+musicPlayer.name=Some name
+musicPlayer.volume=70
+```
