@@ -79,3 +79,32 @@ class MusicPlayer {
     }
 }
 ```
+
+## Внедряем зависимость с помощью setter
+
+```
+fun getName(): String? {
+        return name
+    }
+    fun setName(name: String) {
+        this.name = name
+    }
+    fun getVolume(): Int? {
+        return volume
+    }
+    fun setVolume(volume: Int) {
+        this.volume = volume
+    }
+```
+
+```
+<bean id="musicPlayer"
+          class="edu.school21.ioc.music.MusicPlayer">
+        <property name="music" ref="musicBean"/>
+
+        <property name="name" value="Some name"/>
+        <property name="volume" value="10"/>
+    </bean>
+```
+
+<img width="515" alt="Screen Shot 2022-09-20 at 7 15 07 PM" src="https://user-images.githubusercontent.com/84707645/191310715-dc1f3a0d-3c76-4760-8e2a-e172e83ef592.png">
