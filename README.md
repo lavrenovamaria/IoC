@@ -35,3 +35,47 @@ MusicPlayer musicPlayer = new MusicPlayer();
 ```
 musicPlayer.setMusic();
 ```
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<beans  xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="musicBean"
+          class="edu.school21.ioc.music.ClassicalMusic">
+    </bean>
+
+    <bean id="musicPlayer"
+          class="edu.school21.ioc.music.MusicPlayer">
+        <property name="music" ref="musicBean"/>
+    </bean>
+</beans>
+```
+
+```
+package edu.school21.ioc.music
+
+class MusicPlayer {
+
+    private var music: Music? = null
+
+    constructor(music: Music) {
+        this.music = music
+    }
+
+    constructor() {
+    }
+
+    fun playMusic() {
+
+        println("Playing: " + music!!.getSong())
+
+    }
+
+    fun setMusic(music: Music) {
+        this.music = music
+    }
+}
+```
