@@ -9,9 +9,18 @@
 
 
 Как подставляется bean:
+1. У нас есть метод setMusic
 
 ```
 fun setMusic(music: Music) {
         this.music = music
     }
 ```
+2. В ApplicationContext есть name="music"
+```
+    <bean id="musicPlayer"
+          class="edu.school21.ioc.music.MusicPlayer">
+        <property name="music" ref="musicBean"/>
+    </bean>
+```
+3. Spring видит setMusic, удаляет set, Music переводит в lower case - music
