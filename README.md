@@ -24,3 +24,14 @@ fun setMusic(music: Music) {
     </bean>
 ```
 3. Spring видит setMusic, удаляет set, Music переводит в lower case - music
+
+## Под капотом когда мы внедряем зависимость с помощью setter
+
+1. Spring создаёт объект класса MusicPlayer, использует пустой конструктор(не передает ничего при создании объекта MusicPlayer();)
+```
+MusicPlayer musicPlayer = new MusicPlayer();
+```
+2. У MusicPlayer вызывает setter setMusic, соответсвующий названию зависимости name="music" и в этот setMusic в качестве аргумента передает тот bean, который бл создан ранее(id="musicBean")
+```
+musicPlayer.setMusic();
+```
