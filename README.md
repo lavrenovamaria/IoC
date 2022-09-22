@@ -17,3 +17,64 @@
 <img width="765" alt="Screen Shot 2022-09-22 at 3 51 14 PM" src="https://user-images.githubusercontent.com/84707645/191775212-31b7a87d-c98c-43c0-993b-a994ab51b100.png">
 
 <img width="765" alt="Screen Shot 2022-09-22 at 3 51 32 PM" src="https://user-images.githubusercontent.com/84707645/191775234-137746c5-571f-4e3a-8be0-6023ef7e6bbc.png">
+
+
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="classpath:musicPlayer.properties"/>
+
+    <bean id="musicBean"
+          class="edu.school21.ioc.music.ClassicalMusic">
+    </bean>
+
+    <bean id="musicPlayer"
+          class="edu.school21.ioc.music.MusicPlayer"
+            scope="prototype">
+        <property name="music" ref="musicBean"/>
+
+        <property name="name" value="${musicPlayer.name}"/>
+        <property name="volume" value="${musicPlayer.volume}"/>
+    </bean>
+</beans>
+```
+
+```
+package edu.school21.ioc
+
+import edu.school21.ioc.music.Music
+import edu.school21.ioc.music.MusicPlayer
+import org.springframework.context.support.ClassPathXmlApplicationContext
+
+object TestSpring {
+    @JvmStatic
+    fun main(args: Array<String>) {
+        val context = ClassPathXmlApplicationContext(
+            "applicationContext.xml"
+        )
+        val musicPlayer: MusicPlayer = context.getBean("musicPlayer", MusicPlayer::class.java)
+        val musicPlayer1: MusicPlayer = context.getBean("musicPlayer", MusicPlayer::class.java)
+
+        val boolean = musicPlayer === musicPlayer1
+        println(boolean)
+
+        musicPlayer.playMusic()
+
+        println(musicPlayer.getName())
+        println(musicPlayer.getVolume())
+
+        musicPlayer.setVolume(1000)
+        println(musicPlayer.getVolume())
+        println(musicPlayer1.getVolume())
+
+        context.close()
+    }
+}
+```
+
+<img width="438" alt="Screen Shot 2022-09-22 at 5 33 22 PM" src="https://user-images.githubusercontent.com/84707645/191775627-0f245a73-e5fe-43b7-b5f7-423b293a73ec.png">
