@@ -78,3 +78,5 @@ object TestSpring {
 ```
 
 <img width="438" alt="Screen Shot 2022-09-22 at 5 33 22 PM" src="https://user-images.githubusercontent.com/84707645/191775627-0f245a73-e5fe-43b7-b5f7-423b293a73ec.png">
+
+Если писать scope="prototype", то результат вывода будет false(хэши двух объектов разные), 70-1000(значит, что операция musicPlayer.setVolume(1000) произошла только над одним объектом)
