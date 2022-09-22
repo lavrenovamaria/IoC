@@ -1,156 +1,19 @@
-# IoC
-Инверсия контейнеров управления и шаблон внедрения зависимостей
+# [Spring Framework. Урок 7: Bean scope (Область видимости бинов)](https://www.youtube.com/watch?v=IcwWPjeBpFU)
 
-[Spring Framework. Урок 6: Внедрение зависимостей. Dependency Injection (DI). Часть 2.](https://www.youtube.com/watch?v=dBxRmUH3Af8)
+<img width="765" alt="Screen Shot 2022-09-22 at 3 39 28 PM" src="https://user-images.githubusercontent.com/84707645/191775108-59e5d0cb-3ae6-40ed-9d35-d9e1fbbbc76e.png">
 
-<img width="862" alt="Screen Shot 2022-09-20 at 6 24 31 PM" src="https://user-images.githubusercontent.com/84707645/191303353-12403e90-5a0a-485b-bf62-e76fc178e610.png">
+<img width="765" alt="Screen Shot 2022-09-22 at 3 39 34 PM" src="https://user-images.githubusercontent.com/84707645/191775120-4ab50e21-b04d-43e1-b405-03670f0bd4ad.png">
 
-<img width="862" alt="Screen Shot 2022-09-20 at 6 25 06 PM" src="https://user-images.githubusercontent.com/84707645/191303383-ae3bccc9-4213-42f5-b6f3-78f31796a22e.png">
+<img width="765" alt="Screen Shot 2022-09-22 at 3 39 48 PM" src="https://user-images.githubusercontent.com/84707645/191775134-93c02e7e-5d1f-4dce-b3e0-53384b4da350.png">
 
+<img width="765" alt="Screen Shot 2022-09-22 at 3 40 18 PM" src="https://user-images.githubusercontent.com/84707645/191775152-3017a24c-ab2e-439a-8024-202713eec9cb.png">
 
-Как подставляется bean:
-1. У нас есть метод setMusic
+<img width="765" alt="Screen Shot 2022-09-22 at 3 43 00 PM" src="https://user-images.githubusercontent.com/84707645/191775157-f2e16d6e-ec8c-4f15-a108-10e02c6e937c.png">
 
-```
-fun setMusic(music: Music) {
-        this.music = music
-    }
-```
-2. В ApplicationContext есть name="music"
-```
-    <bean id="musicPlayer"
-          class="edu.school21.ioc.music.MusicPlayer">
-        <property name="music" ref="musicBean"/>
-    </bean>
-```
-3. Spring видит setMusic, удаляет set, Music переводит в lower case - music
+<img width="765" alt="Screen Shot 2022-09-22 at 3 44 29 PM" src="https://user-images.githubusercontent.com/84707645/191775175-66f0ee42-123a-4877-bd3b-02fafe690aca.png">
 
-## Под капотом когда мы внедряем зависимость с помощью setter
+<img width="765" alt="Screen Shot 2022-09-22 at 3 50 44 PM" src="https://user-images.githubusercontent.com/84707645/191775197-1da7b3a1-9af8-4d98-aee1-b929bde24411.png">
 
-1. Spring создаёт объект класса MusicPlayer, использует пустой конструктор(не передает ничего при создании объекта MusicPlayer();)
-```
-MusicPlayer musicPlayer = new MusicPlayer();
-```
-2. У MusicPlayer вызывает setter setMusic, соответсвующий названию зависимости name="music" и в этот setMusic в качестве аргумента передает тот bean, который бл создан ранее(id="musicBean")
-```
-musicPlayer.setMusic();
-```
+<img width="765" alt="Screen Shot 2022-09-22 at 3 51 14 PM" src="https://user-images.githubusercontent.com/84707645/191775212-31b7a87d-c98c-43c0-993b-a994ab51b100.png">
 
-```
-<?xml version="1.0" encoding="UTF-8"?>
-<beans  xmlns="http://www.springframework.org/schema/beans"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd">
-
-    <bean id="musicBean"
-          class="edu.school21.ioc.music.ClassicalMusic">
-    </bean>
-
-    <bean id="musicPlayer"
-          class="edu.school21.ioc.music.MusicPlayer">
-        <property name="music" ref="musicBean"/>
-    </bean>
-</beans>
-```
-
-```
-package edu.school21.ioc.music
-
-class MusicPlayer {
-
-    private var music: Music? = null
-
-    constructor(music: Music) {
-        this.music = music
-    }
-
-    constructor() {
-    }
-
-    fun playMusic() {
-
-        println("Playing: " + music!!.getSong())
-
-    }
-
-    fun setMusic(music: Music) {
-        this.music = music
-    }
-}
-```
-
-## Внедряем зависимость с помощью setter
-
-```
-fun getName(): String? {
-        return name
-    }
-    fun setName(name: String) {
-        this.name = name
-    }
-    fun getVolume(): Int? {
-        return volume
-    }
-    fun setVolume(volume: Int) {
-        this.volume = volume
-    }
-```
-
-```
-<bean id="musicPlayer"
-          class="edu.school21.ioc.music.MusicPlayer">
-        <property name="music" ref="musicBean"/>
-
-        <property name="name" value="Some name"/>
-        <property name="volume" value="10"/>
-    </bean>
-```
-
-<img width="515" alt="Screen Shot 2022-09-20 at 7 15 07 PM" src="https://user-images.githubusercontent.com/84707645/191310715-dc1f3a0d-3c76-4760-8e2a-e172e83ef592.png">
-
-
-## Добавление файла musicPlayer.properties
-
-```
-<?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
-
-    <context:property-placeholder location="classpath:musicPlayer.properties"/>
-
-    <bean id="musicBean"
-          class="edu.school21.ioc.music.ClassicalMusic">
-    </bean>
-
-    <bean id="musicPlayer"
-          class="edu.school21.ioc.music.MusicPlayer">
-        <property name="music" ref="musicBean"/>
-
-        <property name="name" value="${musicPlayer.name}"/>
-        <property name="volume" value="${musicPlayer.volume}"/>
-    </bean>
-</beans>
-```
-
-<img width="715" alt="Screen Shot 2022-09-20 at 7 57 13 PM" src="https://user-images.githubusercontent.com/84707645/191319127-ed756664-8693-4a3d-a7a6-f3ab0f8eccbe.png">
-
-
-```
-<context:property-placeholder location="classpath:musicPlayer.properties"/>
-```
-отвечает за путь к файлу
-
-```
-        <property name="name" value="${musicPlayer.name}"/>
-        <property name="volume" value="${musicPlayer.volume}"/>
-```
-обращается к значениям в файле
-
-```
-musicPlayer.name=Some name
-musicPlayer.volume=70
-```
+<img width="765" alt="Screen Shot 2022-09-22 at 3 51 32 PM" src="https://user-images.githubusercontent.com/84707645/191775234-137746c5-571f-4e3a-8be0-6023ef7e6bbc.png">
