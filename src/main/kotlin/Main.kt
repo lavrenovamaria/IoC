@@ -11,9 +11,20 @@ object TestSpring {
             "applicationContext.xml"
         )
         val musicPlayer: MusicPlayer = context.getBean("musicPlayer", MusicPlayer::class.java)
+        val musicPlayer1: MusicPlayer = context.getBean("musicPlayer", MusicPlayer::class.java)
+
+        val boolean = musicPlayer === musicPlayer1
+        println(boolean)
+
         musicPlayer.playMusic()
+
         println(musicPlayer.getName())
         println(musicPlayer.getVolume())
+
+        musicPlayer.setVolume(1000)
+        println(musicPlayer.getVolume())
+        println(musicPlayer1.getVolume())
+
         context.close()
     }
 }

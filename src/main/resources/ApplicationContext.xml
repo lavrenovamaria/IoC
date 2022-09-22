@@ -12,7 +12,8 @@
     </bean>
 
     <bean id="musicPlayer"
-          class="edu.school21.ioc.music.MusicPlayer">
+          class="edu.school21.ioc.music.MusicPlayer"
+            scope="prototype">
         <property name="music" ref="musicBean"/>
 
         <property name="name" value="${musicPlayer.name}"/>
